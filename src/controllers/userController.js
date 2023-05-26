@@ -14,6 +14,7 @@ const createAuthor = async function (req, res) {
 
         //-------------email validations------------------------------
         if(!isValid(data.email)) return res.status(400).send({status:false,message:"email is mandatory or should be valid"})
+        data.email=data.email.toLowerCase()
         if (!validator.isEmail(data.email)) return res.status(400).send({ status: false, message: "please enter valid email address!" })
 
         let user = await userModel.findOne({ email: data.email })
@@ -37,7 +38,7 @@ const authorLogin = async function (req, res) {
         let password = req.body.password;
         if (!email) return res.status(400).send({ status: false, error: "UserId missing" });
         if (!password) return res.status(400).send({ status: false, error: "password missing" });
-        let validUser = await authorModel.findOne({ email: email, password: password })
+        let validUser = await userModel.findOne({ email: email, password: password })
         if (!validUser) return res.status(401).send({ status: false, message: "Invalid email or password" })
         const token = jwt.sign({ _id: validUser._id }, "Extra Secret String")
         

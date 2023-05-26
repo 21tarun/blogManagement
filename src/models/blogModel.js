@@ -22,20 +22,12 @@ const blogSchema = new mongoose.Schema({
         required: true
     },
 
-    deletedAt: {
-        type : Date
-    },
+
     isDeleted: {
         type: Boolean,
         default: false
     },
-   publishedAt: {
-    type : Date
-},
-    isPublished: {
-        type: Boolean,
-        default: false
-    }
+
 },{timestamps  : true}
 )
 
