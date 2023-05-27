@@ -3,10 +3,11 @@ const app = express();
 const  mongoose = require('mongoose');
 mongoose.set('strictQuery', true); /// to handle the deprication error
 const route = require('./routes/route.js');
+require('dotenv').config();
 
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://tarun21:tarun1616@cluster0.h0l8mir.mongodb.net/task1", {
+mongoose.connect(process.env.MONGODB_CLUSTER, {
     useNewUrlParser: true
 })
 .then( () => console.log("MongoDb is connected"))
